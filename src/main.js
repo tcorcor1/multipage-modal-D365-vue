@@ -5,19 +5,14 @@ import bulma from 'bulma/css/bulma.css'
 
 Vue.use(bulma)
 Vue.config.productionTip = false
-Vue.mixin({
-  data() {
-    return {
-      steps: [
-        "ModalStart",
-        "ModalInfo",
-        "ModalSubmit"
-      ],
-    }
-  },
-});
+Vue.prototype.steps = [
+  "ModalStart",
+  "ModalInfo",
+  "ModalSubmit"
+];
 
 new Vue({
   render: h => h(App),
   router,
 }).$mount('#app')
+

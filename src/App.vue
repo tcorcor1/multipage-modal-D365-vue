@@ -2,10 +2,10 @@
   <div id="app">
     <section class='head-nav'>
       <div>
-        <button v-if="this.$route.name !== 'ModalStart'" @click="previousPage()" class="button is-link is-outlined is-medium is-rounded">Back</button>
+        <button v-if="this.$route.name !== this.steps[0]" @click="previousPage()" class="button is-link is-outlined is-medium is-rounded">Back</button>
       </div>
       <div>
-        <button v-if="this.$route.name !== 'ModalSubmit'" @click="nextPage()" class="button is-link is-outlined is-medium is-rounded">Next</button>
+        <button v-if="this.$route.name !== this.steps[this.steps.length-1]" @click="nextPage()" class="button is-link is-outlined is-medium is-rounded">Next</button>
       </div>
     </section>
     <router-view />
