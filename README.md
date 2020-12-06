@@ -1,24 +1,8 @@
 # multi-page-modal
 
-## Project setup
-```
-npm install
-```
+## Documentation
+Please see the following for information on how to use this module:
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+<https://tldr-dynamics.com/blog/create-multipage-modal-dialog-vue>
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Demo](https://tldr-dynamics-assets.s3.us-east-2.amazonaws.com/img/posts/multipagemodal_105.gif)
