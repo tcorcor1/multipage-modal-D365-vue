@@ -8,17 +8,21 @@ Vue.use(Router);
 
 export default new Router({
   mode: 'history',
-  routes: [{
-    path: '/',
-    name: 'ModalStart',
-    component: ModalStart,
-  },{
-    path: '/info/',
-    name: 'ModalInfo',
-    component: ModalInfo,
-  },{
-    path: '/submit/',
-    name: 'ModalSubmit',
-    component: ModalSubmit,
-  }],
+  routes: [
+    {
+      path: '/',
+      name: 'ModalStart',
+      component: ModalStart,
+    },
+    {
+      path: '/info/',
+      name: 'ModalInfo',
+      component: ModalInfo,
+    },
+    {
+      path: '/submit/',
+      name: 'ModalSubmit',
+      component: ModalSubmit,
+    },
+  ],
 });

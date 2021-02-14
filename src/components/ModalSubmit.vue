@@ -1,58 +1,75 @@
 <template>
-  <div class='body'>
+  <div class="body">
     <p>PAGE 3</p>
     <strong>IMPORTANT FORM</strong>
-    <div class='form-wrapper'>
-      <div class='field'>
-        <label class='label'>Name</label>
-        <div class='control'>
-          <input id='name' class='input' type='text' placeholder='Text input'>
-        </div>
+    <form>
+      <div class="form-field">
+        <label class="label" for="name">Name</label>
+        <input
+          id="name"
+          class="input"
+          type="text"
+          placeholder="Provide Fullname"
+        />
       </div>
-      <div class='field'>
-        <label class='label'>Username</label>
-        <div class='control'>
-          <input id='username' class='input' type='text' placeholder='Text input'>
-        </div>
+      <div class="form-field">
+        <label class="label" for="username">Username</label>
+        <input
+          id="username"
+          class="input"
+          type="text"
+          placeholder="Provide Username"
+        />
       </div>
-      <div class='field'>
-        <label class='label'>Email</label>
-        <div class='control'>
-          <input id='email' class='input' type='text' placeholder='Text input'>
-        </div>
+      <div class="form-field">
+        <label class="label" for="email">Email</label>
+        <input
+          id="email"
+          class="input"
+          type="text"
+          placeholder="Provide Email"
+        />
       </div>
-      <div style='text-align: right;'>
-        <button @click="submitForm()" class="button is-primary is-medium">Submit</button>
+      <div style="text-align: right;">
+        <input
+          type="submit"
+          class="button is-primary is-medium"
+          value="Submit"
+          @click="submitForm"
+        />
       </div>
-    </div>
+    </form>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'ModalSubmit',
   methods: {
-    submitForm() {
+    submitForm(clickEvent) {
+      clickEvent.preventDefault();
       const formFields = Array.from(document.getElementsByClassName('input'))
-        .filter((e) => e.value)
-        .map((e) => this.createObj(e))
+        .filter(e => e.value)
+        .map(e => {
+          return {
+            id: e.id,
+            value: e.value,
+          };
+        });
       const fieldsJson = JSON.stringify(formFields);
       parent.window.sessionStorage.setItem('tldr-form', fieldsJson);
-      parent.document.getElementById('defaultDialogChromeCloseIconButton').click(); // to close pop-up
+      window.close();
     },
-    createObj (e) {
-      let obj = {};
-      obj.id = e.id;
-      obj.value = e.value;
-      return obj;
-    },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-.form-wrapper {
+form {
   margin: 20px;
+}
+
+.form-field {
+  padding: 10px 0;
 }
 </style>

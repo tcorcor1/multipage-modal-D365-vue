@@ -1,16 +1,14 @@
 <template>
-  <div class='body'>
+  <div class="body">
     <p>PAGE 1</p>
     <strong>Get Started Now</strong>
   </div>
 </template>
 
 <script>
-
 export default {
-  name: 'ModalStart'
-}
+  name: 'ModalStart',
+};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
