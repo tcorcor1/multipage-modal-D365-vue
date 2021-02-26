@@ -35,7 +35,7 @@
           type="submit"
           class="button is-primary is-medium"
           value="Submit"
-          @click="submitForm"
+          @click="submitFormHandler"
         />
       </div>
     </form>
@@ -43,12 +43,23 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'ModalSubmit',
   methods: {
-    submitForm(clickEvent) {
+    submitFormHandler(clickEvent) {
       clickEvent.preventDefault();
-      const formFields = Array.from(document.getElementsByClassName('input'))
+
+      const formFields = this.returnFormInputs();
+      const fieldsJson = JSON.stringify(formFields);
+
+      parent.window.sessionStorage.setItem('tldr-form', fieldsJson);
+      window.close();
+    },
+
+    returnFormInputs() {
+      return Array.from(document.getElementsByClassName('input'))
         .filter(e => e.value)
         .map(e => {
           return {
@@ -56,9 +67,54 @@ export default {
             value: e.value,
           };
         });
-      const fieldsJson = JSON.stringify(formFields);
-      parent.window.sessionStorage.setItem('tldr-form', fieldsJson);
-      window.close();
+    },
+
+    async triggerFlowWithFetch() {
+      const flowEndpoint = process.env.VUE_APP_FLOW_ENDPOINT;
+      const formFields = this.returnFormInputs();
+
+      await fetch(flowEndpoint, {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json;charset=UTF-8',
+        },
+        body: JSON.stringify(formFields),
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw new Error(
+              'Multipage Modal Failure: POST response status not ok',
+            );
+          }
+        })
+        .then(result => {
+          console.log('Fetch Response', result);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    },
+
+    async triggerFlowWithAxios() {
+      const flowEndpoint = process.env.VUE_APP_FLOW_ENDPOINT;
+      const formFields = this.returnFormInputs();
+
+      axios
+        .post(flowEndpoint, {
+          headers: { 'content-type': 'application/json;charset=UTF-8' },
+          data: JSON.stringify(formFields),
+        })
+        .then(response => {
+          console.log('axios response', response);
+        })
+        .catch(error => {
+          console.error(
+            'Multipage Modal Failure: POST response status not ok',
+            error.message,
+          );
+        });
     },
   },
 };
