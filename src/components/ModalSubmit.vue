@@ -69,7 +69,8 @@ export default {
         });
     },
 
-    async triggerFlowWithFetch() {
+    async triggerFlowWithFetch(clickEvent) {
+      clickEvent.preventDefault();
       const flowEndpoint = process.env.VUE_APP_FLOW_ENDPOINT;
       const formFields = this.returnFormInputs();
 
@@ -95,16 +96,19 @@ export default {
         .catch(error => {
           console.error(error);
         });
+
+      window.close();
     },
 
-    async triggerFlowWithAxios() {
+    async triggerFlowWithAxios(clickEvent) {
+      clickEvent.preventDefault();
       const flowEndpoint = process.env.VUE_APP_FLOW_ENDPOINT;
       const formFields = this.returnFormInputs();
 
-      axios
+      await axios
         .post(flowEndpoint, {
           headers: { 'content-type': 'application/json;charset=UTF-8' },
-          data: JSON.stringify(formFields),
+          data: formFields,
         })
         .then(response => {
           console.log('axios response', response);
@@ -115,6 +119,8 @@ export default {
             error.message,
           );
         });
+
+      window.close();
     },
   },
 };
