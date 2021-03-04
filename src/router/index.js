@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import ModalStart from '../components/ModalStart.vue';
-import ModalInfo from '../components/ModalInfo.vue';
-import ModalSubmit from '../components/ModalSubmit.vue';
+import ModalStart from '../views/ModalStart.vue';
+import ModalInfo from '../views/ModalInfo.vue';
+import ModalSubmit from '../views/ModalSubmit.vue';
 
 Vue.use(Router);
 
