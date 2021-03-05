@@ -3,7 +3,7 @@
     <section class="head-nav">
       <div>
         <button
-          v-if="this.$route.name !== this.steps[0]"
+          v-if="this.$route.name !== this.routeCollection[0]"
           @click="previousPage()"
           class="button is-link is-outlined is-medium is-rounded"
         >
@@ -12,7 +12,10 @@
       </div>
       <div>
         <button
-          v-if="this.$route.name !== this.steps[this.steps.length - 1]"
+          v-if="
+            this.$route.name !==
+              this.routeCollection[this.routeCollection.length - 1]
+          "
           @click="nextPage()"
           class="button is-link is-outlined is-medium is-rounded"
         >
@@ -29,15 +32,20 @@ export default {
   name: 'App',
   methods: {
     nextPage() {
-      let currPageIndex = this.steps.indexOf(this.$route.name);
-      const nextPage = this.steps[++currPageIndex];
+      let currPageIndex = this.routeCollection.indexOf(this.$route.name);
+      const nextPage = this.routeCollection[++currPageIndex];
       this.$router.push({ name: nextPage });
     },
 
     previousPage() {
-      let currPageIndex = this.steps.indexOf(this.$route.name);
-      const previousPage = this.steps[--currPageIndex];
+      let currPageIndex = this.routeCollection.indexOf(this.$route.name);
+      const previousPage = this.routeCollection[--currPageIndex];
       this.$router.push({ name: previousPage });
+    },
+  },
+  computed: {
+    routeCollection() {
+      return this.$router.options.routes.map(e => e.name);
     },
   },
   mounted() {
