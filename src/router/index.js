@@ -10,17 +10,17 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '*', // using ModalStart as catchall/fallback as using rel. path of web resource iframe would not match route
       name: 'ModalStart',
       component: ModalStart,
     },
     {
-      path: '/info/',
+      path: '/info',
       name: 'ModalInfo',
       component: ModalInfo,
     },
     {
-      path: '/submit/',
+      path: '/submit',
       name: 'ModalSubmit',
       component: ModalSubmit,
     },

@@ -48,10 +48,6 @@ export default {
       return this.$router.options.routes.map(e => e.name);
     },
   },
-  mounted() {
-    //force router
-    this.$router.push({ name: 'ModalStart' });
-  },
 };
 </script>
 
